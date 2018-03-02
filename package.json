@@ -9,10 +9,12 @@
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
     "react-facebook": "^4.2.1",
-    "react-mdl": "^1.11.0",
     "react-redux": "^5.0.7",
     "react-scripts": "1.1.1",
     "redux": "^3.7.2",
+    "semantic-ui-css": "^2.3.0",
+    "semantic-ui-react": "^0.78.3",
+    "underscore": "^1.8.3",
     "whatwg-fetch": "^2.0.3"
   },
   "scripts": {

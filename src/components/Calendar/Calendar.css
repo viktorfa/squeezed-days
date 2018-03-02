@@ -1,0 +1,42 @@
+.calendar {
+  margin-top: 4rem;
+  text-align: center;
+}
+
+.calendar > ul {
+  padding: 0;
+  list-style: none;
+  font-style: italic;
+}
+
+.calendar > ul > li {
+  background-color: lightblue;
+  padding: 5px 0;
+}
+
+.calendar > ul > li.holiday {
+  background-color: lightcoral;
+}
+
+.calendar > ul > li.weekend {
+  background-color: rgb(197, 150, 237);
+}
+
+.calendar > ul > li.inneklemt {
+  background-color: #71a74b;
+}
+
+.squeezedDay {
+  background-color: #71a74b !important;
+  color: whitesmoke;
+}
+
+.firstSqueezedDay {
+  margin-top: 5px;
+}
+
+.button {
+  background-color: #3f51b5;
+  color: #fff;
+  margin: 2px;
+}
