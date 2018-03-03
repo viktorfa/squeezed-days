@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import _ from 'lodash';
+import {Link, Element} from 'react-scroll';
 import classes from './Calendar.css'
 import YearButtons from "./YearButtons";
 import SqueezeNumberButtons from "./SqueezeNumberButtons";
@@ -12,7 +13,8 @@ const Calendar = (props) => (
 
         <div>
             <h3 style={{margin: '10px 0 0 0'}}>{`År ${props.year}`}</h3>
-            <h4 style={{margin: '0 0 10px 0'}}>Regner <strong>{props.squeezeNumber}</strong> dager mellom fri som inneklemt</h4>
+            <h4 style={{margin: '0 0 10px 0'}}>Regner <strong>{props.squeezeNumber}</strong> dager mellom fri som
+                inneklemt</h4>
         </div>
 
         <ScrollStickyMenu>
@@ -33,7 +35,7 @@ const Calendar = (props) => (
         <ul style={{listStyle: 'none', padding: 0}}>
             {_.map(props.calendar, (day) => {
                 return (
-                    <SqueezedDay type={day.type} day={day} includeExtraText/>
+                    <CalendarDay type={day.type} day={day} includeExtraText/>
                 )
             })}
         </ul>
@@ -48,7 +50,10 @@ Calendar.propTypes = {
     switchSqueezeNumber: PropTypes.func
 };
 
-const SqueezedDay = (props) => {
+const Day = (props) => {
+
+
+    console.log(props.day.formattedDate);
 
     let backgroundColor;
     let color;
@@ -58,7 +63,7 @@ const SqueezedDay = (props) => {
     switch (props.type) {
         case 'inneklemt':
             backgroundColor = '#71a74b';
-            color = 'inherit';
+            color = 'black';
             text = props.day.formattedDate + ' - INNEKLEMT!';
             break;
         case 'weekend':
@@ -92,11 +97,39 @@ const SqueezedDay = (props) => {
     )
 };
 
-SqueezedDay.propTypes = {
+Day.propTypes = {
     day: PropTypes.object.isRequired,
     type: PropTypes.string,
     includeExtraText: PropTypes.bool,
     firstSqueezedDay: PropTypes.bool
+};
+
+const ButtonSqueezedDay = (props) => {
+    return (
+        <Link to={props.day.formattedDate} offset={-document.documentElement.clientHeight / 2} smooth={true}
+              duration={200}>
+            <Day day={props.day} firstSqueezedDay={props.firstSqueezedDay} includeExtraText={false}
+                 type={'inneklemt'}/>
+        </Link>
+    )
+};
+
+ButtonSqueezedDay.propTypes = {
+    day: PropTypes.object.isRequired,
+    firstSqueezedDay: PropTypes.bool
+};
+
+const CalendarDay = (props) => {
+    return (
+        <Element name={props.day.formattedDate}>
+            <Day day={props.day} firstSqueezedDay={false} includeExtraText={true} type={props.type}/>
+        </Element>
+    )
+};
+
+CalendarDay.propTypes = {
+    day: PropTypes.object.isRequired,
+    type: PropTypes.string,
 };
 
 const SqueezedDays = (props) => (
@@ -110,11 +143,11 @@ const SqueezedDays = (props) => (
                  */
                 _
                     .filter(props.calendar, day => day.type === 'inneklemt')
-                    .map((day, index, filtered) => {
+                    .map((day) => {
                         if (day.daysFromLast === 0) {
-                            return <SqueezedDay key={day.day} day={day} firstSqueezedDay type={'inneklemt'}/>
+                            return <ButtonSqueezedDay key={day.formattedDate} day={day} firstSqueezedDay/>
                         } else {
-                            return <SqueezedDay key={day.day} day={day} type={'inneklemt'}/>
+                            return <ButtonSqueezedDay key={day.formattedDate} day={day}/>
                         }
                     })
             }
