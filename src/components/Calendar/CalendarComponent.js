@@ -4,24 +4,29 @@ import _ from 'lodash';
 import classes from './Calendar.css'
 import YearButtons from "./YearButtons";
 import SqueezeNumberButtons from "./SqueezeNumberButtons";
+import ScrollStickyMenu from "./ScrollStickyMenu";
 
 
 const Calendar = (props) => (
     <div className={classes.calendar}>
-        <h3>{`År ${props.year}`}</h3>
 
-        <YearButtons
-            switchYear={props.switchYear}
-            year={props.year}
-        />
-        <br/>
+        <div>
+            <h3 style={{margin: '10px 0 0 0'}}>{`År ${props.year}`}</h3>
+            <h4 style={{margin: '0 0 10px 0'}}>Regner <strong>{props.squeezeNumber}</strong> dager mellom fri som inneklemt</h4>
+        </div>
 
-        <SqueezeNumberButtons
-            switchSqueezeNumber={props.switchSqueezeNumber}
-            currentSqueezeNumber={props.squeezeNumber}
-        />
-
-        <h4>Regner <strong>{props.squeezeNumber}</strong> dager mellom fri som inneklemt</h4>
+        <ScrollStickyMenu>
+            <YearButtons
+                style={{margin: '2px'}}
+                switchYear={props.switchYear}
+                year={props.year}
+            />
+            <SqueezeNumberButtons
+                style={{margin: '2px'}}
+                switchSqueezeNumber={props.switchSqueezeNumber}
+                currentSqueezeNumber={props.squeezeNumber}
+            />
+        </ScrollStickyMenu>
 
         <SqueezedDays calendar={props.calendar}/>
 

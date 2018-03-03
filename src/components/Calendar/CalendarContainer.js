@@ -1,8 +1,6 @@
 import {connect} from 'react-redux';
 import CalendarComponent from './CalendarComponent'
 
-const SWITCH_YEAR = 'SWITCH_YEAR';
-
 const switchYear = (year) => {
   return {
     type: 'SWITCH_YEAR',
