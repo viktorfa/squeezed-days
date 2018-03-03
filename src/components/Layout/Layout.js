@@ -10,8 +10,8 @@ class Layout extends React.Component {
     render() {
         return (
             <div>
-                <FacebookProvider appId="1749300428641975" style={{float: 'right'}}>
-                    <Like href={"https://www.facebook.com/inneklemtedager/"}/>
+                <FacebookProvider appId="1749300428641975">
+                    <Like href={"https://www.facebook.com/inneklemtedager/"} width={document.documentElement.clientWidth}/>
                 </FacebookProvider>
                 <div>
                     <Header />
