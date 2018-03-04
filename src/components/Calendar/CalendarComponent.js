@@ -52,9 +52,6 @@ Calendar.propTypes = {
 
 const Day = (props) => {
 
-
-    console.log(props.day.formattedDate);
-
     let backgroundColor;
     let color;
     let text;
