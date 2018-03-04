@@ -1,4 +1,5 @@
 import moment from 'moment';
+import 'moment/locale/nb';
 import _ from 'underscore';
 // ------------------------------------
 // Help functions
